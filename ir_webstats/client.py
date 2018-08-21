@@ -378,7 +378,7 @@ class iRWebStats:
         res = parse(r)
         total_results, results = 0, []
         if len(res['d']):
-            total_results = res['d']['46']
+            total_results = res['d']['15']
             results = res['d']['r']
             header = res['m']
             results = format_results(results, header)
@@ -479,9 +479,9 @@ class iRWebStats:
             event is identified by a subsession id. """
 
         r = self.__req(ct.URL_GET_EVENTRESULTS % (subsession, sessnum))\
-                .encode('utf8')
-        data = [x for x in csv.reader(StringIO(r), delimiter=',',
-                                      quotechar='"')]
+                        .encode('utf8')
+        data = [x for x in csv.reader(StringIO(r.decode('utf8')),
+                                      delimiter=',', quotechar='"')]
         header_ev, header_res = data[0], data[3]
         event_info = dict(list(zip(header_ev, data[1])))
         results = [dict(list(zip(header_res, x))) for x in data[4:]]
