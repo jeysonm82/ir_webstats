@@ -1,5 +1,6 @@
 from distutils.core import setup
 
-setup(name='iR WebStats',
-      version='1.0',
+setup(name='irwebstats',
+      version='1.1',
+      py_modules=['client']
      )
