@@ -488,7 +488,7 @@ class iRWebStats:
 
         r = self.__req(ct.URL_GET_EVENTRESULTS % (subsession, sessnum))\
                 .encode('utf8')
-        data = [x for x in csv.reader(StringIO(r), delimiter=',',
+        data = [x for x in csv.reader(StringIO(r.decode('utf8')), delimiter=',',
                                       quotechar='"')]
         header_ev, header_res = data[0], data[3]
         event_info = dict(list(zip(header_ev, data[1])))
