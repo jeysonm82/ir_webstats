@@ -392,6 +392,14 @@ class iRWebStats:
         pprint("Getting iRacing Seasons with Stats")
         resp = self.__req(ct.URL_SEASON_STANDINGS2)
         return self._load_irservice_var("SeasonListing", resp)
+        
+    def last_series(self, userid):
+        """ Returns stats for the last 3 series the driver has raced in """
+
+        r = self.__req(ct.URL_LAST_SERIES % userid)
+        res = parse(r)
+
+        return res  
 
     @logged_in
     def season_standings(self, season, carclass, club=ct.ALL, raceweek=ct.ALL,
