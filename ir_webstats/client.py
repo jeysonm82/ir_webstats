@@ -131,8 +131,7 @@ class iRWebStats:
         if (data is None) or useget:
             resp = requests.get(url, headers=h, params=data)
         else:
-            h['Content-Type'] = 'application/x-www-form-urlencoded;\
-                    charset=UTF-8'
+            h['Content-Type'] = 'application/x-www-form-urlencoded'
             resp = requests.post(url, data=data, headers=h)
         if 'Set-Cookie' in resp.headers and grab_cookie:
             self.last_cookie = resp.headers['Set-Cookie']
