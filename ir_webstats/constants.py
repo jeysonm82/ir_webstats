@@ -9,6 +9,8 @@ IRATING_ROAD_CHART = 2
 
 RACE_TYPE_OVAL = 1
 RACE_TYPE_ROAD = 2
+RACE_TYPE_DIRT_OVAL = 3
+RACE_TYPE_DIRT_ROAD = 4
 
 LIC_ROOKIE = 1
 LIC_D = 2
@@ -16,14 +18,14 @@ LIC_C = 3
 LIC_B = 4
 LIC_A = 5
 LIC_PRO = 6
-LIC_PRO_WC  = 7
+LIC_PRO_WC = 7
 
 
 
 SORT_IRATING = 'irating'
 SORT_TIME = 'start_time'
 SORT_POINTS = 'points'
-ORDER_DESC  = 'desc' 
+ORDER_DESC = 'desc'
 ORDER_ASC = 'asc'
 
 
