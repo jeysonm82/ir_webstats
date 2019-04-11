@@ -123,13 +123,22 @@ class iRWebStats:
         # Sleep/wait to avoid flooding the service with requests
         time.sleep(ct.WAIT_TIME)  # 0.3 seconds
         h = ct.HEADERS.copy()
+        
+        cookies = {}
         if cookie is not None:  # Send the cookie
-            h['Cookie'] = cookie
+            cookie_pairs = cookie.split("; ")
+            #h['Cookie'] = cookie
         elif len(self.last_cookie):
-            h['Cookie'] = self.last_cookie
-
+            cookie_pairs = self.last_cookie.split("; ")
+            #h['Cookie'] = self.last_cookie
+        
+        #generate cookies dict
+        for pair in cookie_pairs:
+            parts = pair.split("=", 1)
+            cookies[parts[0]] = parts[1]               
+        
         if (data is None) or useget:
-            resp = requests.get(url, headers=h, params=data)
+            resp = requests.get(url, headers=h, params=data, cookies=cookies)
         else:
             h['Content-Type'] = 'application/x-www-form-urlencoded;\
                     charset=UTF-8'
@@ -200,6 +209,7 @@ class iRWebStats:
         """ Gets career stats (top5, top 10, etc.) of driver (custid)."""
         r = self.__req(ct.URL_CAREER_STATS % (custid),
                        cookie=self.last_cookie)
+        #print(r)
         return parse(r)[0]
 
     @logged_in
