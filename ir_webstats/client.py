@@ -369,8 +369,8 @@ class iRWebStats:
             tc = lambda s:\
                 time.mktime(datetime.datetime.strptime(s, "%Y-%m-%d").
                             timetuple()) * 1000
-            data['starttime_low'] = tc(date_range[0])  # multiplied by 1000
-            data['starttime_high'] = tc(date_range[1])
+            data['starttime_low'] = int(tc(date_range[0]))  # multiplied by 1000
+            data['starttime_high'] = int(tc(date_range[1]))
 
         # License levels
         lic_vars = {ct.LIC_ROOKIE: 'showrookie', ct.LIC_A: 'showclassa',
@@ -497,6 +497,7 @@ class iRWebStats:
         results = [dict(list(zip(header_res, x))) for x in data[4:]]
 
         return event_info, results
+
 
 if __name__ == '__main__':
     irw = iRWebStats()
