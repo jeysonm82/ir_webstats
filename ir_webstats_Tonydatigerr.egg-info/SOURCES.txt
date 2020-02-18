@@ -1,0 +1,10 @@
+setup.py
+ir_webstats/__init__.py
+ir_webstats/client.py
+ir_webstats/constants.py
+ir_webstats/decorator.py
+ir_webstats/util.py
+ir_webstats_Tonydatigerr.egg-info/PKG-INFO
+ir_webstats_Tonydatigerr.egg-info/SOURCES.txt
+ir_webstats_Tonydatigerr.egg-info/dependency_links.txt
+ir_webstats_Tonydatigerr.egg-info/top_level.txt
