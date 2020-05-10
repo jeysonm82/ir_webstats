@@ -1,7 +1,7 @@
 import inspect
 import json
 
-from ir_webstats import decorator
+from . import decorator
 
 try:
     from urllib.parse import unquote  # python3

@@ -15,11 +15,11 @@ except:
 
 from io import StringIO
 import requests
-from ir_webstats import constants as ct
+from . import constants as ct
 import datetime
 import csv
 import time
-from ir_webstats.util import *
+from . util import *
 
 
 class iRWebStats:
