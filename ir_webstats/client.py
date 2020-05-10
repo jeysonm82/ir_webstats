@@ -15,11 +15,11 @@ except:
 
 from io import StringIO
 import requests
-from ir_webstats import constants as ct
+from . import constants as ct
 import datetime
 import csv
 import time
-from ir_webstats.util import *
+from . util import *
 
 
 class iRWebStats:
@@ -392,6 +392,14 @@ class iRWebStats:
         pprint("Getting iRacing Seasons with Stats")
         resp = self.__req(ct.URL_SEASON_STANDINGS2)
         return self._load_irservice_var("SeasonListing", resp)
+        
+    def last_series(self, userid):
+        """ Returns stats for the last 3 series the driver has raced in """
+
+        r = self.__req(ct.URL_LAST_SERIES % userid)
+        res = parse(r)
+
+        return res  
 
     @logged_in
     def season_standings(self, season, carclass, club=ct.ALL, raceweek=ct.ALL,
@@ -478,8 +486,7 @@ class iRWebStats:
         """ Gets the event results (table of positions, times, etc.). The
             event is identified by a subsession id. """
 
-        r = self.__req(ct.URL_GET_EVENTRESULTS % (subsession, sessnum))\
-                .encode('utf8')
+        r = self.__req(ct.URL_GET_EVENTRESULTS % (subsession, sessnum))
         data = [x for x in csv.reader(StringIO(r), delimiter=',',
                                       quotechar='"')]
         header_ev, header_res = data[0], data[3]
