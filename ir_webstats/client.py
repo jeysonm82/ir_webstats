@@ -615,23 +615,39 @@ class iRWebStats:
         results = format_results(results, header)
         return results
 
+    # @logged_in
+    # def event_results(self, subsession, sessnum=0):
+    #     """Gets the event results (table of positions, times, etc.). The
+    #     event is identified by a subsession id."""
+
+    #     r = self.__req(ct.URL_GET_EVENTRESULTS % (subsession, sessnum)).encode("utf8")
+    #     data = [
+    #         x
+    #         for x in csv.reader(
+    #             StringIO(r.decode("utf8")), delimiter=",", quotechar='"'
+    #         )
+    #     ]
+    #     header_ev, header_res = data[0], data[3]
+    #     event_info = dict(list(zip(header_ev, data[1])))
+    #     results = [dict(list(zip(header_res, x))) for x in data[4:]]
+
+    #     return event_info, results
+
     @logged_in
-    def event_results(self, subsession, sessnum=0):
-        """Gets the event results (table of positions, times, etc.). The
-        event is identified by a subsession id."""
+    def event_results(self, subsession, cust_id=None):
+        """ Gets specific session details """
+        driver_result = None
 
-        r = self.__req(ct.URL_GET_EVENTRESULTS % (subsession, sessnum)).encode("utf8")
-        data = [
-            x
-            for x in csv.reader(
-                StringIO(r.decode("utf8")), delimiter=",", quotechar='"'
-            )
-        ]
-        header_ev, header_res = data[0], data[3]
-        event_info = dict(list(zip(header_ev, data[1])))
-        results = [dict(list(zip(header_res, x))) for x in data[4:]]
+        r = self.__req(ct.URL_EVENT_RESULTS, data={"subsessionID": subsession, custid=cust_id})
+        res = parse(r)
+        if not res:
+            return None, None
 
-        return event_info, results
+        driver_results = [x for x in res["rows"] if x["custid"] == cust_id and x["simsestypename"] == "Race"]
+        if driver_results:
+            driver_result = driver_results[0]
+        
+        return res, driver_result
 
 
 if __name__ == "__main__":
