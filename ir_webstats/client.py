@@ -541,6 +541,7 @@ class iRWebStats:
     @logged_in
     def hosted_results(
         self,
+        cust_id=None,
         session_host=None,
         session_name=None,
         date_range=None,
@@ -562,6 +563,8 @@ class iRWebStats:
             "lowerbound": lowerbound,
             "upperbound": upperbound,
         }
+        if cust_id is not None:
+            data["participant_custid"] = cust_id
         if session_host is not None:
             data["sessionhost"] = session_host
         if session_name is not None:

@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='ir_webstats',
-      version='1.1.3',
+      version='1.1.4',
       packages=['ir_webstats'],
       url='https://github.com/jasondilworth56/ir_webstats/',
       author='Jason Dilworth',
