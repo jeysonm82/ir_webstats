@@ -140,6 +140,8 @@ class iRWebStats:
         h = ct.HEADERS.copy()
         if cookie is not None:
             h["Cookie"] = cookie
+        else:
+            h["Cookie"] = self.last_cookie
 
         # cookies = {}
         # if cookie is not None:  # Send the cookie
