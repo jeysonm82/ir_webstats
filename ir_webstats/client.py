@@ -582,6 +582,8 @@ class iRWebStats:
         r = self.__req(ct.URL_HOSTED_RESULTS, data=data)
         # tofile(r)
         res = parse(r)
+        if not res:
+            return None, None
         total_results = res["rowcount"]
         results = res["rows"]  # doesn't need format_results
         return results, total_results
