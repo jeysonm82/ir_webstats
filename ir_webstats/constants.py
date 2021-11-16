@@ -76,7 +76,7 @@ URL_SERIES_RACERESULTS = (
     "https://members.iracing.com/memberstats/member/GetSeriesRaceResults"
 )
 
-URL_EVENT_RESULTS = "http://members.iracing.com/membersite/member/GetSubsessionResults?subsessionID=%s&custid=%s"
+URL_EVENT_RESULTS = "https://members.iracing.com/membersite/member/GetSubsessionResults"
 URL_GET_EVENTRESULTS = "https://members.iracing.com/membersite/member/GetEventResultsAsCSV?subsessionid=%s&simsesnum=%s&includeSummary=1"  # simsesnum 0 race, -1 qualy or practice, -2 practice
 
 

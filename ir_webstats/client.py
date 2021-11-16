@@ -638,7 +638,7 @@ class iRWebStats:
         """ Gets specific session details """
         driver_result = None
 
-        r = self.__req(ct.URL_EVENT_RESULTS, data={"subsessionID": subsession, custid=cust_id})
+        r = self.__req(ct.URL_EVENT_RESULTS, data={"subsessionID": subsession, "custid": cust_id})
         res = parse(r)
         if not res:
             return None, None
