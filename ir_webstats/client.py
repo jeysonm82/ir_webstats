@@ -482,7 +482,7 @@ class iRWebStats:
         r = self.__req(ct.URL_RESULTS_ARCHIVE, data=data, cookie=self.last_cookie)
         res = parse(r)
         total_results, results = 0, []
-        if len(res["d"]):
+        if "d" in res and len(res["d"]):
             total_results = res["d"]["15"]
             results = res["d"]["r"]
             header = res["m"]
@@ -578,9 +578,8 @@ class iRWebStats:
                 )
                 * 1000
             )
-            data["starttime_lowerbound"] = tc(date_range[0])
-            # multiplied by 1000
-            data["starttime_upperbound"] = tc(date_range[1])
+            data["start_time_lowerbound"] = int(tc(date_range[0]))
+            data["start_time_upperbound"] = int(tc(date_range[1]))
 
         r = self.__req(ct.URL_HOSTED_RESULTS, data=data)
         # tofile(r)
@@ -638,15 +637,21 @@ class iRWebStats:
         """ Gets specific session details """
         driver_result = None
 
-        r = self.__req(ct.URL_EVENT_RESULTS, data={"subsessionID": subsession, "custid": cust_id})
+        r = self.__req(
+            ct.URL_EVENT_RESULTS, data={"subsessionID": subsession, "custid": cust_id}
+        )
         res = parse(r)
         if not res:
             return None, None
 
-        driver_results = [x for x in res["rows"] if x["custid"] == cust_id and x["simsestypename"] == "Race"]
+        driver_results = [
+            x
+            for x in res["rows"]
+            if x["custid"] == cust_id and x["simsestypename"] == "Race"
+        ]
         if driver_results:
             driver_result = driver_results[0]
-        
+
         return res, driver_result
 
 
