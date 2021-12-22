@@ -1,8 +1,8 @@
 #!/usr/bin/python
 """ iRWebStats class. Check examples.py for example usage. """
-__author__ = "Jeyson Molina"
+__author__ = "Jeyson Molina & Jason Dilworth"
 __email__ = "jjmc82@gmail.com"
-__version__ = "1.0"
+__version__ = "1.1.7"
 
 
 import urllib
