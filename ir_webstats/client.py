@@ -636,6 +636,7 @@ class iRWebStats:
     def event_results(self, subsession, cust_id=None):
         """ Gets specific session details """
         driver_result = None
+        driver_qualify_result = None
 
         r = self.__req(
             ct.URL_EVENT_RESULTS, data={"subsessionID": subsession, "custid": cust_id}
@@ -649,10 +650,18 @@ class iRWebStats:
             for x in res["rows"]
             if x["custid"] == cust_id and x["simsestypename"] == "Race"
         ]
+        
+        qualifying_results = [
+            x for x in res["rows"] if x["custid"] == cust_id and x["simsesname"] == "QUALIFY"
+        ]
+        
         if driver_results:
             driver_result = driver_results[0]
+            
+        if qualifying_results:
+            driver_qualify_result = qualifying_results[0]
 
-        return res, driver_result
+        return res, driver_result, driver_qualify_result
 
 
 if __name__ == "__main__":
