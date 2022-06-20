@@ -14,12 +14,14 @@ try:
 except:
     encode = urllib.urlencode  # python2
 
-from io import StringIO
-import requests
-from ir_webstats import constants as ct
-import datetime
 import csv
+import datetime
 import time
+from io import StringIO
+
+import requests
+
+from ir_webstats import constants as ct
 from ir_webstats.util import *
 
 
@@ -66,6 +68,8 @@ class iRWebStats:
             return False
 
     def login(self, username="", password=""):
+        import base64
+        import hashlib
         """Log in to iRacing members site. If there is a valid cookie saved
         then it tries to use it to avoid a new login request. Returns
         True is the login was succesful and stores the customer id
@@ -73,9 +77,14 @@ class iRWebStats:
 
         if self.logged:
             return True
+
+        # iRacing requires Base64 encoded string as of 2022 season 3
+        password_hash = hashlib.sha256((password + username.lower()).encode('utf-8')).digest()
+        password_b64 = base64.b64encode(password_hash).decode('utf-8')
+
         data = {
             "username": username,
-            "password": password,
+            "password": password_b64,
             "utcoffset": 300,
             "todaysdate": "",
         }
